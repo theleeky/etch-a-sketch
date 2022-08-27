@@ -4,3 +4,19 @@
     font-family: 'VT323', 'space Mono', monospace;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btns {
+    display: flex;
+    gap: 20px;
+}
+
+.color-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
