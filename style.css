@@ -24,12 +24,26 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 600px;
     height: 600px;
     background-color: aquamarine;
     border: 2px solid aquamarine;
     border-radius: 6px;
     margin-bottom: 40px;
+}
+
+.row {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: white;
+    flex: 1;
+}
+
+.box {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    flex: 1;
+    border: 1px solid lightgray;
 }
