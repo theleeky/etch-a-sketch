@@ -1,9 +1,9 @@
 // TODO
 /*
-1. global variable for the color
-2. set background color and slider color to be that global variable
-3. create grid
-4. if mouse over div set color to global variable color
+- mouse over grid change colour funct
+- colour change function
+- button functions black, shader, lighten, rainbow, eraser
+- slider function
 */
 
 // grid will be dependant on slider
@@ -12,7 +12,7 @@ console.log(grid);
 
 const container = document.querySelector('.container');
 const div = document.createElement('div');
-
+grid = 10;
 
 function createGrid(grid) {
     for (let i = 0; i < grid; i++) {
@@ -28,5 +28,10 @@ function createGrid(grid) {
         };
     };
 };
+
+
+function gridColor(boxSelection, color) {
+    boxSelection.style.backgroundColor = color;
+}
 
 createGrid(grid)
