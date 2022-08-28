@@ -29,9 +29,24 @@ function createGrid(grid) {
     };
 };
 
-
 function gridColor(boxSelection, color) {
     boxSelection.style.backgroundColor = color;
 }
 
+
+
 createGrid(grid)
+
+function main() {
+    // listen for mouse-over box
+    const boxSelection = document.querySelectorAll('.box')
+    boxSelection.forEach((selectedBox) => {
+        selectedBox.addEventListener('mouseover', () => {
+            selectedBox.style.backgroundColor = color;
+        });
+    });
+}
+
+let color = 'black'
+
+main()
