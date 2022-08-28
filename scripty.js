@@ -6,15 +6,9 @@
 - slider function
 */
 
-// grid will be dependant on slider
-let grid = parseInt(document.querySelector('#slider').value);
-console.log(grid);
-
 let color = 'black'
 
 const container = document.querySelector('.container');
-const div = document.createElement('div');
-
 
 function createGrid(number = 16) {
     // clear grid
@@ -38,29 +32,29 @@ function createGrid(number = 16) {
     
 };
 
-function gridColor(boxSelection, color) {
-    boxSelection.style.backgroundColor = color;
+function boxListen() {
+    // change box color 
+    let boxSelection = document.querySelectorAll('.box')
+    boxSelection.forEach((selectedBox) => {
+        selectedBox.addEventListener('mouseover', () => {
+            selectedBox.style.backgroundColor = color;
+        });
+    });
 }
 
-
 function main() {
+    
+    createGrid();
+    boxListen();
 
      // change grid size
      const slider = document.querySelector('#slider');
      slider.addEventListener('mouseup', () => {
         let sliderValue = document.querySelector('#slider').value;
         createGrid(sliderValue)
+        boxListen();
      })
-
-    // change box color 
-    const boxSelection = document.querySelectorAll('.box')
-    boxSelection.forEach((selectedBox) => {
-        selectedBox.addEventListener('mouseover', () => {
-            selectedBox.style.backgroundColor = color;
-        });
-    });
 
 }
 
-createGrid()
 main()
