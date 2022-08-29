@@ -1,11 +1,9 @@
 // TODO
 /*
-- slider number
+
 - color change
 - buttons
 */
-
-let color = 'black'
 
 const container = document.querySelector('.container');
 
@@ -36,7 +34,7 @@ function boxListen() {
     let boxSelection = document.querySelectorAll('.box')
     boxSelection.forEach((selectedBox) => {
         selectedBox.addEventListener('mouseover', () => {
-            selectedBox.style.backgroundColor = color;
+            selectedBox.style.backgroundColor = colorChange();
         });
     });
 }
@@ -52,12 +50,14 @@ function main() {
     createGrid();
     boxListen();
     sliderNumber();
+    
+    
 
      // change grid size
      const slider = document.querySelector('#slider');
      slider.addEventListener('mouseup', () => {
         let sliderValue = document.querySelector('#slider').value;
-        createGrid(sliderValue)
+        createGrid(sliderValue);
         boxListen();
         sliderNumber(sliderValue);
      })
@@ -65,3 +65,13 @@ function main() {
 }
 
 main()
+
+
+function colorChange() {
+    const colorPicker = document.querySelector('#color-choice');
+    let color = colorPicker.value;
+    colorPicker.addEventListener('input', () => {
+        color = colorPicker.value;
+    })
+    return color;
+}
