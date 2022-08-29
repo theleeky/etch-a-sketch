@@ -4,12 +4,16 @@ function main() {
     sliderNumber();
     sliderChange();
     colorChange();
-    boxListen();
+    rainbowMode();
 }
 
 
 const container = document.querySelector('.container');
-let color = 'black'
+let color = '#000000';
+let shader = false;
+let lighten = false;
+let rainbow = false;
+
 
 function createGrid(number = 16) {
     // clear grid
@@ -39,6 +43,7 @@ function boxListen() {
     boxSelection.forEach((selectedBox) => {
         selectedBox.addEventListener('mouseover', () => {
             selectedBox.style.backgroundColor = color;
+            console.log(selectedBox.style.backgroundColor);
         });
     });
 }
@@ -70,12 +75,22 @@ function colorChange() {
     })
     const black = document.querySelector('#black');
     black.addEventListener('click', () => {
-        color = 'black'
+        color = '#000000'
     })
     const eraser = document.querySelector('#eraser');
     eraser.addEventListener('click', () => {
-        color = 'white'
+        color = '#ffffff'
     })
+}
+
+function rainbowMode() {
+    let boxSelection = document.querySelectorAll('.box')
+    boxSelection.forEach((selectedBox) => {
+        selectedBox.addEventListener('mouseover', () => {
+            const randomColor = Math.floor(Math.random()*16777215).toString(16)  // https://css-tricks.com/snippets/javascript/random-hex-color/ 
+            selectedBox.style.backgroundColor = '#' + randomColor;
+        });
+    });
 }
 
 
