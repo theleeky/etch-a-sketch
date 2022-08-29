@@ -1,9 +1,8 @@
 // TODO
 /*
-- mouse over grid change colour funct
-- colour change function
-- button functions black, shader, lighten, rainbow, eraser
-- slider function
+- slider number
+- color change
+- buttons
 */
 
 let color = 'black'
@@ -42,10 +41,17 @@ function boxListen() {
     });
 }
 
+function sliderNumber(value = 16) {
+    
+    const sliderNumber = document.querySelector('.value')
+    sliderNumber.textContent = value + 'x' + value;
+}
+
 function main() {
     
     createGrid();
     boxListen();
+    sliderNumber();
 
      // change grid size
      const slider = document.querySelector('#slider');
@@ -53,6 +59,7 @@ function main() {
         let sliderValue = document.querySelector('#slider').value;
         createGrid(sliderValue)
         boxListen();
+        sliderNumber(sliderValue);
      })
 
 }
