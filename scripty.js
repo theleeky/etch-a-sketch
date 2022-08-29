@@ -65,6 +65,17 @@ function colorChange() {
     colorPicker.addEventListener('input', () => {
         color = colorPicker.value;
     })
+    colorPicker.addEventListener('click', () => {
+        color = colorPicker.value;
+    })
+    const black = document.querySelector('#black');
+    black.addEventListener('click', () => {
+        color = 'black'
+    })
+    const eraser = document.querySelector('#eraser');
+    eraser.addEventListener('click', () => {
+        color = 'white'
+    })
 }
 
 
