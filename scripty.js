@@ -4,7 +4,7 @@ function main() {
     sliderNumber();
     sliderChange();
     colorChange();
-    rainbowMode();
+    shadeMode();
 }
 
 
@@ -31,6 +31,7 @@ function createGrid(number = 16) {
         for (let j = 0; j < number; j++) {
             const box = document.createElement('div');
             box.classList.toggle('box');
+            box.style.backgroundColor = '#ffffff'
             rows.appendChild(box);
         };
     };
@@ -43,6 +44,7 @@ function boxListen() {
     boxSelection.forEach((selectedBox) => {
         selectedBox.addEventListener('mouseover', () => {
             selectedBox.style.backgroundColor = color;
+            console.log(hexc(selectedBox.style.backgroundColor));
         });
     });
 }
@@ -93,7 +95,21 @@ function rainbowMode() {
 }
 
 function shadeMode() {
-    
+    let boxSelection = document.querySelectorAll('.box')
+    boxSelection.forEach((selectedBox) => {
+        selectedBox.addEventListener('mouseover', () => {
+            selectedBox.style.backgroundColor = LightenDarkenColor(hexc(selectedBox.style.backgroundColor), -20);
+        });
+    });
+}
+
+function lightenMode() {
+    let boxSelection = document.querySelectorAll('.box')
+    boxSelection.forEach((selectedBox) => {
+        selectedBox.addEventListener('mouseover', () => {
+            selectedBox.style.backgroundColor = LightenDarkenColor(hexc(selectedBox.style.backgroundColor), 20);
+        });
+    });
 }
 
 // function takes in a color value and amount to lighten or darken
@@ -128,5 +144,15 @@ function LightenDarkenColor(col, amt) {
     return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
   
 }
+
+function hexc(colorval) {
+    var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    delete(parts[0]);
+    for (var i = 1; i <= 3; ++i) {
+      parts[i] = parseInt(parts[i]).toString(16);
+      if (parts[i].length == 1) parts[i] = '0' + parts[i];
+    }
+    return '#' + parts.join('');
+  }
 
 main()
