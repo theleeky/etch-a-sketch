@@ -4,12 +4,13 @@ function main() {
     sliderNumber();
     sliderChange();
     colorChange();
-    shadeMode();
+    boxListen();
 }
 
 
 const container = document.querySelector('.container');
-let color = '#000000';
+let color = '#101010';
+let boxColor = true;
 let shader = false;
 let lighten = false;
 let rainbow = false;
@@ -40,11 +41,21 @@ function createGrid(number = 16) {
 
 function boxListen() {
     // change box color 
-    let boxSelection = document.querySelectorAll('.box')
-    boxSelection.forEach((selectedBox) => {
-        selectedBox.addEventListener('mouseover', () => {
-            selectedBox.style.backgroundColor = color;
-            console.log(hexc(selectedBox.style.backgroundColor));
+        let boxSelection = document.querySelectorAll('.box')
+        boxSelection.forEach((selectedBox) => {
+            selectedBox.addEventListener('mouseover', () => {
+                console.log(selectedBox.style.backgroundColor)
+                if(boxColor){
+                    selectedBox.style.backgroundColor = color;
+                } else if (shader){
+                    selectedBox.style.backgroundColor = LightenDarkenColor(hexc(selectedBox.style.backgroundColor), -10);
+                } else if (lighten){
+                    selectedBox.style.backgroundColor = LightenDarkenColor(hexc(selectedBox.style.backgroundColor), 10);
+                } else if (rainbow){
+                    const randomColor = Math.floor(Math.random()*16777215).toString(16)  // https://css-tricks.com/snippets/javascript/random-hex-color/ 
+                    selectedBox.style.backgroundColor = '#' + randomColor;
+                }
+                
         });
     });
 }
@@ -70,46 +81,55 @@ function colorChange() {
     const colorPicker = document.querySelector('#color-choice');
     colorPicker.addEventListener('input', () => {
         color = colorPicker.value;
+        boxColor = true;
+        shader = false;
+        lighten = false;
+        rainbow = false;;
     })
     colorPicker.addEventListener('click', () => {
         color = colorPicker.value;
+        boxColor = true;
+        shader = false;
+        lighten = false;
+        rainbow = false;
     })
     const black = document.querySelector('#black');
     black.addEventListener('click', () => {
-        color = '#000000'
+        color = '#101010';
+        boxColor = true;
+        shader = false;
+        lighten = false;
+        rainbow = false;
     })
     const eraser = document.querySelector('#eraser');
     eraser.addEventListener('click', () => {
-        color = '#ffffff'
+        color = '#ffffff';
+        boxColor = true;
+        shader = false;
+        lighten = false;
+        rainbow = false;
     })
-}
-
-function rainbowMode() {
-    let boxSelection = document.querySelectorAll('.box')
-    boxSelection.forEach((selectedBox) => {
-        selectedBox.addEventListener('mouseover', () => {
-            const randomColor = Math.floor(Math.random()*16777215).toString(16)  // https://css-tricks.com/snippets/javascript/random-hex-color/ 
-            selectedBox.style.backgroundColor = '#' + randomColor;
-        });
-    });
-}
-
-function shadeMode() {
-    let boxSelection = document.querySelectorAll('.box')
-    boxSelection.forEach((selectedBox) => {
-        selectedBox.addEventListener('mouseover', () => {
-            selectedBox.style.backgroundColor = LightenDarkenColor(hexc(selectedBox.style.backgroundColor), -20);
-        });
-    });
-}
-
-function lightenMode() {
-    let boxSelection = document.querySelectorAll('.box')
-    boxSelection.forEach((selectedBox) => {
-        selectedBox.addEventListener('mouseover', () => {
-            selectedBox.style.backgroundColor = LightenDarkenColor(hexc(selectedBox.style.backgroundColor), 20);
-        });
-    });
+    const shading = document.querySelector('#shade');
+    shading.addEventListener('click', () => {
+        boxColor = false;
+        shader = true;
+        lighten = false;
+        rainbow = false;
+    })
+    const lightening = document.querySelector('#lighten');
+    lightening.addEventListener('click', () => {
+        boxColor = false;
+        shader = false;
+        lighten = true;
+        rainbow = false;
+    })
+    const rainbowed = document.querySelector('#rainbow');
+    rainbowed.addEventListener('click', () => {
+        boxColor = false;
+        shader = false;
+        lighten = false;
+        rainbow = true;
+    })
 }
 
 // function takes in a color value and amount to lighten or darken
@@ -145,6 +165,8 @@ function LightenDarkenColor(col, amt) {
   
 }
 
+// function that converts rgb values to hexidecimal
+//https://stackoverflow.com/questions/5999209/how-to-get-the-background-color-code-of-an-element-in-hex
 function hexc(colorval) {
     var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
     delete(parts[0]);
