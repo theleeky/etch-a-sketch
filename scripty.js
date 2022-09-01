@@ -44,7 +44,6 @@ function boxListen() {
         let boxSelection = document.querySelectorAll('.box')
         boxSelection.forEach((selectedBox) => {
             selectedBox.addEventListener('mouseover', () => {
-                console.log(selectedBox.style.backgroundColor)
                 if(boxColor){
                     selectedBox.style.backgroundColor = color;
                 } else if (shader){
