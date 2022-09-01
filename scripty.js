@@ -55,7 +55,8 @@ function boxListen() {
                     const randomColor = Math.floor(Math.random()*16777215).toString(16)  // https://css-tricks.com/snippets/javascript/random-hex-color/ 
                     selectedBox.style.backgroundColor = '#' + randomColor;
                 }
-                
+                container.style.backgroundColor = color;
+                container.style.borderColor = color;
         });
     });
 }
